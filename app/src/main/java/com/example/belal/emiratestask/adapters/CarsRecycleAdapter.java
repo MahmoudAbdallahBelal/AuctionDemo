@@ -112,7 +112,6 @@ public class CarsRecycleAdapter extends RecyclerView.Adapter<CarsRecycleAdapter.
 
 
 
-        holder.timerflag  = position;
 
         prepareDate(carsList ,position ,holder);
 
@@ -341,7 +340,6 @@ public class CarsRecycleAdapter extends RecyclerView.Adapter<CarsRecycleAdapter.
 
          total_millis = (end_millis - start_millis); //total time in milliseconds
 
-        if(holder.timerflag == position) {
 
             //1000 = 1 second interval
             holder.cdt = new CountDownTimer(total_millis, 1000) {
@@ -379,7 +377,7 @@ public class CarsRecycleAdapter extends RecyclerView.Adapter<CarsRecycleAdapter.
 
             holder.cdt.start();
 
-        }
+
 
 
 
