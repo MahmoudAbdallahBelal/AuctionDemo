@@ -79,6 +79,7 @@ public class CarsListPresenter implements BasePresenter<CarsListView> {
                     @Override
                     public final void onNext(CarsListObject response) {
                         mView.showCarsList(response.getCars());
+                        mView.showRefreshInterval(response.getRefreshInterval());
 
                     }
                 });

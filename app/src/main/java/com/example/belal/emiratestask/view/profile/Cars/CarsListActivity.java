@@ -2,6 +2,7 @@ package com.example.belal.emiratestask.view.profile.Cars;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,8 @@ import com.example.belal.emiratestask.dagger.DaggerApplication;
 import com.example.belal.emiratestask.objects.Cars.CarsListDetails;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 
 
@@ -36,7 +39,8 @@ public class CarsListActivity extends AppCompatActivity  implements CarsListView
     private RecyclerView mRecycleView;
     private SwipeRefreshLayout mSwipeRefresh;
 
-
+    CountDownTimer countDownTimer;
+    long refreshInterval ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,13 +62,29 @@ public class CarsListActivity extends AppCompatActivity  implements CarsListView
         ((DaggerApplication) getApplication()).getAppComponent().inject(this);
 
          mCarsListPresenter.onAttach(this);
+        mCarsListPresenter.getCarsList();
 
-         mCarsListPresenter.getCarsList();
+
+
 
 
 
     }
 
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        countDownTimer.cancel();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        countDownTimer.cancel();
+
+    }
 
     @Override
     public void onAttache() {
@@ -107,13 +127,38 @@ public class CarsListActivity extends AppCompatActivity  implements CarsListView
 
         }
 
-           carsRecycleAdapter = new CarsRecycleAdapter(list , CarsListActivity.this);
-           mRecycleView.setAdapter(carsRecycleAdapter);
+            carsRecycleAdapter = new CarsRecycleAdapter(list , CarsListActivity.this);
+            mRecycleView.setAdapter(carsRecycleAdapter);
+            AlphaAnimation flashGray = new AlphaAnimation(2F, 0.8F);
+            linearLayoutBg.startAnimation(flashGray);
 
 
 
 
 
+
+    }
+
+    @Override
+    public void showRefreshInterval(long interval) {
+
+        countDownTimer = new CountDownTimer(interval * 1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+
+            }
+
+            @Override
+            public void onFinish() {
+
+                mCarsListPresenter.getCarsList();
+                countDownTimer.start();
+
+            }
+        };
+
+        countDownTimer.start();
     }
 
 

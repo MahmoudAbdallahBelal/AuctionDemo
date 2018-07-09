@@ -15,5 +15,7 @@ public interface CarsListView extends BaseView {
 
 
     void showCarsList(List<CarsListDetails> carsListDetails);
+    void showRefreshInterval(long interval);
+
 
 }

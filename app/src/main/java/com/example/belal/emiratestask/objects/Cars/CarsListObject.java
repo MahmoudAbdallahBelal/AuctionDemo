@@ -9,6 +9,17 @@ public class CarsListObject {
 
 
 
+    @SerializedName("RefreshInterval")
+   private long RefreshInterval;
+
+    public long getRefreshInterval() {
+        return RefreshInterval;
+    }
+
+    public void setRefreshInterval(long refreshInterval) {
+        RefreshInterval = refreshInterval;
+    }
+
     @SerializedName("Cars")
     private List<CarsListDetails> Cars;
 
