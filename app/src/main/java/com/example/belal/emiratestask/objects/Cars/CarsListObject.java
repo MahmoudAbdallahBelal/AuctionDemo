@@ -12,6 +12,19 @@ public class CarsListObject {
     @SerializedName("RefreshInterval")
    private long RefreshInterval;
 
+
+
+    @SerializedName("Ticks")
+    private long Ticks;
+
+    public long getTicks() {
+        return Ticks;
+    }
+
+    public void setTicks(long ticks) {
+        Ticks = ticks;
+    }
+
     public long getRefreshInterval() {
         return RefreshInterval;
     }

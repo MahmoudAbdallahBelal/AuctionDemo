@@ -7,6 +7,8 @@ public class EndPoints {
     public  static  final String BASE_URL = "http://api.emiratesauction.com/";
 
     public  static  final  String GET_CARS="v2/carsonline";
+    public static  final  String  SET_TICKS ="v2/carsonline/";
+
 
     public static final  String OLD_TARGET_IMAGE_GENERAL_SIZE = "t_,w_[w],h_[h]/images.jpg";
 

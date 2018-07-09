@@ -8,8 +8,10 @@ import com.example.belal.emiratestask.baseClass.BasePresenter;
 import com.example.belal.emiratestask.dagger.DaggerApplication;
 import com.example.belal.emiratestask.helper.Utilities;
 import com.example.belal.emiratestask.objects.Cars.CarsListObject;
+import com.example.belal.emiratestask.objects.Cars.TicksResponse;
 
 import java.util.List;
+import java.util.Timer;
 
 import javax.inject.Inject;
 
@@ -32,6 +34,8 @@ public class CarsListPresenter implements BasePresenter<CarsListView> {
 
     @Inject
     Context mContext;
+
+    long ticks;
 
 
     @Override
@@ -69,6 +73,7 @@ public class CarsListPresenter implements BasePresenter<CarsListView> {
                     @Override
                     public final void onCompleted() {
 
+                        getTicks();
                     }
 
                     @Override
@@ -80,12 +85,48 @@ public class CarsListPresenter implements BasePresenter<CarsListView> {
                     public final void onNext(CarsListObject response) {
                         mView.showCarsList(response.getCars());
                         mView.showRefreshInterval(response.getRefreshInterval());
+                        ticks = response.getTicks();
 
                     }
                 });
 
 
 
+
+
+    }
+
+
+
+    public  void getTicks(){
+
+
+        if(!Utilities.checkConnection(mContext)){
+            mView.showMessage("No Internet Connection");
+            return;
+        }
+
+        mApiInterface.getTicksObservable(ticks)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<TicksResponse>() {
+                    @Override
+                    public final void onCompleted() {
+
+                    }
+
+                    @Override
+                    public final void onError(Throwable e) {
+                        mView.showMessage("Internet Connection\n"+e.getMessage());
+                    }
+
+                    @Override
+                    public final void onNext(TicksResponse response) {
+
+                        ticks = response.getTicks();
+
+                    }
+                });
 
 
     }
