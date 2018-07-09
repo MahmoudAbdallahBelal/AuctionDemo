@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Cars List</string>
+    <string name="toolbar_title">cars &amp; machinery</string>
+    <string name="filter">Filter</string>
+    <string name="sort">Sort</string>
+    <string name="grid">Grid View</string>
+    <string name="scroll">Scroll down to Search</string>
+    <string name="lot">Lot #</string>
+    <string name="bids">Bids</string>
+    <string name="time_left">Time Left</string>
+
+</resources>

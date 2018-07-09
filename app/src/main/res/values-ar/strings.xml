@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">مزاد السيارات</string>
+    <string name="toolbar_title"> السيارات و الآلات  </string>
+    <string name="filter">بحث</string>
+    <string name="sort">ترتيب</string>
+    <string name="grid"> شبكية</string>
+    <string name="scroll">يمكنك النزول للأسفل</string>
+    <string name="lot">صفقة #</string>
+    <string name="bids">العروض </string>
+    <string name="time_left"> الوقت المتبقي</string>
+
+</resources>
